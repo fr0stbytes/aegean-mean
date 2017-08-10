@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const bodyParser = require('body-parser');
+const router = express.Router();
+const authentication = require('./routes/authentication');
 
 const app = express();
 
@@ -16,8 +19,12 @@ mongoose.connect(config.uri, (err) => {
   }
 });
 
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 // Provide static directory for frontend
 app.use(express.static(__dirname + '/client/dist/'));
+
+app.use('/authentication', authentication);
 
 app.get('*', (req, res) => {
   res.send ('Hello world');
