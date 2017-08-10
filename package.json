@@ -1,0 +1,24 @@
+{
+  "name": "aegean-mean",
+  "version": "0.0.1",
+  "description": "MEAN app development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fr0stbytes/aegean-mean.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fr0stbytes/aegean-mean/issues"
+  },
+  "homepage": "https://github.com/fr0stbytes/aegean-mean#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongoose": "^4.11.6"
+  }
+}
