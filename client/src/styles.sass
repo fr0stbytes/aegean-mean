@@ -1,15 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bulma/sass/utilities/initial-variables"
+$blue:    #3386ff !default
 
-$primary:    #3386ff !default
-$grey-dark: #6c6c6c !default
+@import '../node_modules/bootstrap/scss/bootstrap'
+@import "~font-awesome/css/font-awesome.css"
 
-@import "~bulma/bulma"
-
-.button.is-white
-  color: #6c6c6c
-.button.is-white:hover, .button.is-white.is-hovered
-  color: #3386ff
 
 .main-container
   overflow: hidden
@@ -19,3 +13,16 @@ $grey-dark: #6c6c6c !default
 
 .has-margin-3
   margin-top: 3em
+
+.has-border-bottom
+  border-bottom: 1px solid #ededed
+  padding-bottom: .5em
+
+.has-padding-top
+  padding-top: .5em
+
+.is-small
+  font-size: .75em
+
+.navbar
+  background-color: #fff

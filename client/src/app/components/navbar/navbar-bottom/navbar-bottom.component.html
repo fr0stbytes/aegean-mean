@@ -1,0 +1,26 @@
+<nav class="navbar navbar-toggleable-md navbar-light">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Nature</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" routerLink="/sightseeing">Sightseeing</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" routerLink="/eat-and-drink">Eat & Drink</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Local market</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Useful info</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
