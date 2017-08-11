@@ -21,16 +21,22 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Create an account</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>One fine body&hellip;</p>
+    <p>For a better user experience sign in to Aegean Guides so you can fully plan and customize your next journey!</p>
+    <app-register></app-register>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    <div class="is-small">
+      <p>
+        To use Aegean Guides you must have cookies enabled. <br>
+        Also, we’ll never post to Facebook or Google without your permission. For more info, please see Login FAQ.
+      </p>
+    </div>
   </div>
 </ng-template>
 
