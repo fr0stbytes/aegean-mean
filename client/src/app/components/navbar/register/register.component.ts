@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +12,18 @@ import { FormBuilder, FormGroup, Validators,} from '@angular/forms';
 export class RegisterComponent {
 
   form: FormGroup;
+  message;
+  messageClass;
+  processing;
+  emailValid;
+  emailMessage;
+  usernameValid;
+  usernameMessage;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.createForm(); // Create Angular 2 Form when component loads
   }
@@ -44,6 +55,23 @@ export class RegisterComponent {
       confirm: ['', Validators.required] // Field is required
     }, { validator: this.matchingPasswords('password', 'confirm') }); // Add custom validator to form for matching passwords
   }
+
+  //Form enable and disableForm
+  disableForm() {
+    this.form.controls['email'].disable();
+    this.form.controls['username'].disable();
+    this.form.controls['password'].disable();
+    this.form.controls['confirm'].disable();
+  }
+
+  enableForm() {
+    this.form.controls['email'].disable();
+    this.form.controls['username'].enable();
+    this.form.controls['password'].enable();
+    this.form.controls['confirm'].enable();
+  }
+
+
 
   // Function to validate e-mail is proper format
   validateEmail(controls) {
@@ -93,8 +121,58 @@ export class RegisterComponent {
     }
   }
 
+  //Check if email is already taken
+  checkEmail() {
+    this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
+      if(!data.success) {
+        this.emailValid = false;
+        this.emailMessage = data.message;
+      } else {
+        this.emailValid = true;
+        this.emailMessage = data.message;
+      }
+    });
+  }
+
+  //Check if email is already taken
+  checkUsername() {
+    this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
+      if(!data.success) {
+        this.usernameValid = false;
+        this.usernameMessage = data.message;
+      } else {
+        this.usernameValid = true;
+        this.usernameMessage = data.message;
+      }
+    });
+  }
+
+  // Submit new user
   onRegisteSubmit() {
-    console.log ('submitted');
+
+    this.processing = true;
+    this.disableForm();
+
+    const user = {
+      email: this.form.get('email').value,
+      username: this.form.get('username').value,
+      password: this.form.get('password').value,
+    }
+
+    this.authService.registerUser(user).subscribe(data => {
+      if(!data.sucess) {
+        this.messageClass = 'alert alert-danger';
+        this.message = data.message;
+      } else {
+        this.messageClass = 'alert alert-success';
+        this.message = data.message;
+        this.processing = false;
+        this.enableForm();
+        setTimeout(() => {
+          this.router.navigate(['/login']); // Redirect to login view
+        }, 2000);
+      }
+    });
   }
 
   ngOnInit() {
