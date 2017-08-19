@@ -160,7 +160,7 @@ bcrypt.hash(this.password, null, null, (err, hash) => {
 });
 
 //Compare passwords
-userSchema.methods.comparePassword = (password) => {
+userSchema.methods.comparePassword = function(password) {
   return bcrypt.compareSync(password, this.password); //match with db password, return true or false
 };
 

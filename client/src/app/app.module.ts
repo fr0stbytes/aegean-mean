@@ -5,8 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
-import { AuthService } from './services/auth.service'
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/notAuth.guard';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +19,8 @@ import { NavbarBottomComponent } from './components/navbar/navbar-bottom/navbar-
 import { SightseeingComponent } from './components/sightseeing/sightseeing.component';
 import { EatAndDrinkComponent } from './components/eat-and-drink/eat-and-drink.component';
 import { RegisterComponent } from './components/navbar/register/register.component';
+import { LoginComponent } from './components/navbar/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,9 @@ import { RegisterComponent } from './components/navbar/register/register.compone
     NavbarBottomComponent,
     SightseeingComponent,
     EatAndDrinkComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +41,10 @@ import { RegisterComponent } from './components/navbar/register/register.compone
     NgbModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    FlashMessagesModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, NotAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

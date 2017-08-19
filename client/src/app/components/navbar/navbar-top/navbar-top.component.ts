@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-navbar-top',
@@ -9,7 +12,12 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class NavbarTopComponent {
   closeResult: string;
 
-    constructor(private modalService: NgbModal) {}
+    constructor(
+      private modalService: NgbModal,
+      private router: Router,
+      private authService: AuthService,
+      private flashMessagesService: FlashMessagesService
+    ) {}
 
     open(content) {
       this.modalService.open(content).result.then((result) => {
@@ -28,4 +36,11 @@ export class NavbarTopComponent {
         return  `with: ${reason}`;
       }
     }
+
+    onLogoutClick() {
+      this.authService.logout();
+      this.flashMessagesService.show('You are now logged out. Thanks for stopping by!', {cssClass:'alert-info'});
+      this.router.navigate(['/']);
+    }
+
 }
